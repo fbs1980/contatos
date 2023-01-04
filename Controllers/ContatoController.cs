@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using sistemacontatos.Models;
 using sistemacontatos.Repositorio;
+using System;
 using System.Collections.Generic;
 
 namespace sistemacontatos.Controllers
@@ -41,32 +42,67 @@ namespace sistemacontatos.Controllers
 
         public IActionResult Excluir(int id)
         {
-            _contatoRepositorio.Excluir(id);
-            return RedirectToAction("Index");
+            try
+            {
+                bool excluido = _contatoRepositorio.Excluir(id);
+                if (excluido)
+                {
+                    TempData["MensagemSucesso"] = "Contato excluído com sucesso!";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = $"Não foi possível excluir o contato.";
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Não foi possível cadastrar o contato. Tente novamente. Detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public IActionResult Criar(ContatoModel contato)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _contatoRepositorio.Adicionar(contato);
+                if (ModelState.IsValid)
+                {
+                    _contatoRepositorio.Adicionar(contato);
+                    TempData["MensagemSucesso"] = "Contato cadastrado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View(contato);
+            }
+            catch (System.Exception erro)
+            {
+                TempData["MensagemErro"] = $"Não foi possível cadastrar o contato. Tente novamente. Detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
-
-            return View(contato);
         }
+
 
         [HttpPost]
         public IActionResult Editar(ContatoModel contato)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _contatoRepositorio.Atualizar(contato);
+                if (ModelState.IsValid)
+                {
+                    _contatoRepositorio.Atualizar(contato);
+                    TempData["MensagemSucesso"] = "Contato alterado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+
+                return View(contato);
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Não foi possível alterar o contato. Tente novamente. Detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
             }
-
-            return View(contato);
         }
     }
 }
