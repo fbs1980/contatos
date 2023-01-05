@@ -6,7 +6,7 @@
 <div class="text-center">
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-        <a class="btn btn-outline-success" role="button" asp-controller="Contato" asp-action="Criar">Adicionar novo usuário</a>
+        <a class="btn btn-outline-success" role="button" asp-controller="Usuario" asp-action="Criar">Adicionar novo usuário</a>
     </div>
     <br />
 
@@ -45,7 +45,7 @@
         <tbody>
             @if(Model != null && Model.Any())
             {
-                foreach (var usuario in Model)
+                foreach (UsuarioModel usuario in Model)
                 {
                     <tr>
                         <th scope="row">@usuario.Id</th>
@@ -64,7 +64,7 @@
             }
             else
             {
-                <tr class="odd"><td valign="top" colspan="5">Nenhum usuário encontrado</td></tr>
+                <tr class="odd"><td valign="top" colspan="5">Nenhum usuário encontrado.</td></tr>
             }
         </tbody>
     </table>

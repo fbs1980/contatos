@@ -389,3 +389,4 @@ D:\dev\sistemacontatos\obj\Debug\net5.0\refint\sistemacontatos.dll
 D:\dev\sistemacontatos\obj\Debug\net5.0\sistemacontatos.pdb
 D:\dev\sistemacontatos\obj\Debug\net5.0\sistemacontatos.genruntimeconfig.cache
 D:\dev\sistemacontatos\obj\Debug\net5.0\ref\sistemacontatos.dll
+D:\dev\sistemacontatos\obj\Debug\net5.0\Razor\Views\Usuario\Criar.cshtml.g.cs
